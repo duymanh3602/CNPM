@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.btl.CustomerManager">
+   <children>
+      <ListView layoutX="30.0" layoutY="45.0" prefHeight="650.0" prefWidth="250.0" />
+      <ListView layoutX="280.0" layoutY="45.0" prefHeight="650.0" prefWidth="150.0" />
+      <ListView layoutX="430.0" layoutY="45.0" prefHeight="650.0" prefWidth="170.0" />
+      <ListView layoutX="600.0" layoutY="45.0" prefHeight="650.0" prefWidth="50.0" />
+      <Text layoutX="120.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
+      <Text layoutX="332.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone" />
+      <Text layoutX="506.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
+      <Text layoutX="611.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Age" />
+      <Text layoutX="660.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VIP" />
+      <Text layoutX="729.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room" />
+      <Text layoutX="870.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Details" />
+      <ListView layoutX="650.0" layoutY="45.0" prefHeight="650.0" prefWidth="50.0" />
+      <ListView layoutX="700.0" layoutY="45.0" prefHeight="650.0" prefWidth="110.0" />
+      <ListView layoutX="810.0" layoutY="45.0" prefHeight="650.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>

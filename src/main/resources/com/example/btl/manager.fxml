@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1440.0" style="-fx-background-color: #46a5e5;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.btl.Manager">
+   <children>
+      <StackPane fx:id="contentArea" layoutX="280.0" prefHeight="720.0" prefWidth="1160.0" style="-fx-background-color: white;">
+         <children>
+            <ImageView fitHeight="800.0" fitWidth="1160.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/pearl-river-hotel-home1.jpg" />
+               </image>
+            </ImageView>
+         </children></StackPane>
+      <Pane fx:id="buttonPane" layoutY="390.0" prefHeight="220.0" prefWidth="280.0">
+         <children>
+            <Pane prefHeight="230.0" prefWidth="280.0">
+               <children>
+                  <VBox prefHeight="220.0" prefWidth="280.0">
+                     <children>
+                        <Button fx:id="staff" mnemonicParsing="false" onMouseClicked="#staff" prefHeight="55.0" prefWidth="280.0" text="STAFF" />
+                        <Button fx:id="room" mnemonicParsing="false" onAction="#hotel" prefHeight="55.0" prefWidth="280.0" text="ROOM" />
+                        <Button fx:id="cus" mnemonicParsing="false" onAction="#customer" prefHeight="55.0" prefWidth="280.0" text="CUSTOMER" />
+                        <Button fx:id="salary" mnemonicParsing="false" prefHeight="55.0" prefWidth="280.0" text="SALARY" />
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <ImageView fx:id="logo" fitHeight="280.0" fitWidth="280.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/2-removebg-preview.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="loginButton" layoutY="280.0" mnemonicParsing="false" onAction="#Login" prefHeight="55.0" prefWidth="280.0" text="LOGIN" />
+      <Button fx:id="registerButton" layoutY="335.0" mnemonicParsing="false" onAction="#Register" prefHeight="55.0" prefWidth="280.0" text="REGISTER" />
+   </children>
+</AnchorPane>

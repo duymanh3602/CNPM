@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.btl.StaffManager">
+   <children>
+      <TableView fx:id="table" editable="true" layoutY="70.0" onMouseClicked="#getInfo" prefHeight="650.0" prefWidth="1160.0" />
+      <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false" onAction="#load" prefHeight="35.0" prefWidth="80.0" text="LOAD" />
+      <Button layoutX="95.0" layoutY="35.0" mnemonicParsing="false" onAction="#save" prefHeight="35.0" prefWidth="80.0" text="SAVE" />
+      <Label layoutX="395.0" layoutY="17.0" text="QUẢN LÝ NHÂN VIÊN">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Button layoutX="180.0" layoutY="35.0" mnemonicParsing="false" onAction="#addStaff" prefHeight="35.0" prefWidth="80.0" text="ADD" />
+   </children>
+</AnchorPane>
