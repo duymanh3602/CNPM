@@ -85,6 +85,13 @@ public class Manager implements Initializable {
     }
 
     @FXML
+    public void salary(Event event) throws IOException {
+        Parent fxml = FXMLLoader.load((getClass().getResource("salary.fxml")));
+        contentArea.getChildren().removeAll();
+        contentArea.getChildren().setAll(fxml);
+    }
+
+    @FXML
     public void hotel(Event event) throws IOException {
         Parent fxml = FXMLLoader.load((getClass().getResource("hotelManager.fxml")));
         contentArea.getChildren().removeAll();
@@ -139,16 +146,6 @@ public class Manager implements Initializable {
                         }
                     }
                 }
-
-                /*
-                if (password.getText().equals("111")) {
-                    buttonPane.setVisible(true);
-                    //logo.setVisible(true);
-                    loginButton.setVisible(false);
-                    registerButton.setVisible(false);
-                }
-
-                 */
             } else {
             }
         } else {

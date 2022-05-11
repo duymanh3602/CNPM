@@ -23,6 +23,7 @@
 20020023% %admin% %customer
 20020024% %admin% %customer
 20020438% %admin% %customer
+manager% %manager% %manager
 19020001% %admin% %staff
 19020002% %admin% %staff
 19020003% %admin% %staff
@@ -44,4 +45,3 @@
 19020019% %admin% %staff
 19020020% %admin% %staff
 19020021% %admin% %staff
-19020022% %admin% %staff

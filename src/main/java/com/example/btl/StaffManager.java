@@ -22,6 +22,9 @@ public class StaffManager {
 
     LoadData loadData = new LoadData();
 
+    @FXML
+    public ToggleButton edit;
+
     static {
         SpreadsheetInfo.setLicense("FREE-LIMITED-KEY");
     }
@@ -217,9 +220,9 @@ public class StaffManager {
         } else if (n == 4) {
             return "Age:";
         } else if (n == 5) {
-            return "Work day:";
-        } else {
             return "Salary:";
+        } else {
+            return "Work day:";
         }
     }
 
@@ -233,11 +236,20 @@ public class StaffManager {
         } else if (n == 4) {
             return 50;
         } else if (n == 5) {
-            return 50;
+            return 150;
         } else {
-            return 400;
+            return 300;
         }
     }
+
+    public void edit(Event event) {
+        if(edit.isSelected()) {
+
+        } else {
+            getInfo(event);
+        }
+    }
+
 
     public void getInfo(Event event) {
         System.out.println("Check Okey!");

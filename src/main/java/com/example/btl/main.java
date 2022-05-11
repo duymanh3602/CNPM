@@ -66,7 +66,7 @@ public class main extends Application {
         //ExcelFile workbook = ExcelFile.load("Customer.xlsx");
         //System.out.println(file.getAbsolutePath());
         ExcelWorksheet worksheet = workbook.getWorksheet(0);
-        String[][] sourceData = new String[100][7];
+        String[][] sourceData = new String[100][8];
         for (int row = 0; row < sourceData.length; row++) {
             for (int column = 0; column < sourceData[row].length; column++) {
                 ExcelCell cell = worksheet.getCell(row, column);
@@ -80,9 +80,13 @@ public class main extends Application {
             FileWriter fw = new FileWriter(file1,true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
+            String manager = "manager" + "% %" + "manager" + "% %" + "manager" + "\n";
+            //byte out[] = line.getBytes();
+            //fileOut.write(out);
+            pw.print(manager);
             for (int i = 0;i< sourceData.length;i++) {
-                if (sourceData[i][0] != null && sourceData[i][6] != null) {
-                    String line = sourceData[i][0] + "% %" + sourceData[i][6] + "% %" + "staff" + "\n";
+                if (sourceData[i][0] != null && sourceData[i][7] != null) {
+                    String line = sourceData[i][0] + "% %" + sourceData[i][7] + "% %" + "staff" + "\n";
                     //byte out[] = line.getBytes();
                     //fileOut.write(out);
                     pw.print(line);

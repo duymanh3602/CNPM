@@ -23,7 +23,7 @@
                         <Button fx:id="staff" mnemonicParsing="false" onMouseClicked="#staff" prefHeight="55.0" prefWidth="280.0" text="STAFF" />
                         <Button fx:id="room" mnemonicParsing="false" onAction="#hotel" prefHeight="55.0" prefWidth="280.0" text="ROOM" />
                         <Button fx:id="cus" mnemonicParsing="false" onAction="#customer" prefHeight="55.0" prefWidth="280.0" text="CUSTOMER" />
-                        <Button fx:id="salary" mnemonicParsing="false" prefHeight="55.0" prefWidth="280.0" text="SALARY" />
+                        <Button fx:id="salary" mnemonicParsing="false" onAction="#salary" prefHeight="55.0" prefWidth="280.0" text="SALARY" />
                      </children>
                   </VBox>
                </children>
