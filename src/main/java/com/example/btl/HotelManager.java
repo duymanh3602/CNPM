@@ -5,16 +5,18 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.geometry.Insets;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 public class HotelManager {
     static {
@@ -23,6 +25,9 @@ public class HotelManager {
 
     @FXML
     public TableView table;
+
+    @FXML
+    public ToggleButton edit;
 
     public void load(ActionEvent event) throws IOException {
         //FileChooser fileChooser = new FileChooser();
@@ -131,6 +136,82 @@ public class HotelManager {
             return 150;
         } else {
             return 260;
+        }
+    }
+
+    public void edit(Event event) {
+        if (edit.isSelected()) {
+
+        } else {
+            getInfo(event);
+        }
+    }
+
+    public void getInfo(Event event) {
+        TablePosition pos = (TablePosition) table.getSelectionModel().getSelectedCells().get(0);
+        int row = pos.getRow();
+        ObservableList cells = (ObservableList) table.getItems().get(row);
+
+        try {
+            if (cells.get(0).toString() != null) {
+
+                Alert menu = new Alert(Alert.AlertType.NONE);
+                menu.setTitle("About");
+                menu.setHeaderText("Room Information!");
+                //menu.initStyle(StageStyle.UNDECORATED);
+                //menu.getButtonTypes().clear();
+                GridPane grid = new GridPane();
+                grid.setHgap(10);
+                grid.setVgap(10);
+                grid.setPadding(new Insets(20, 150, 10, 10));
+
+                TextField name = new TextField();
+                name.setText(cells.get(0).toString());
+                name.setEditable(false);
+                TextField add = new TextField();
+                add.setText(cells.get(1).toString());
+                add.setEditable(false);
+                TextField rate = new TextField();
+                rate.setText(cells.get(2).toString());
+                rate.setEditable(false);
+                TextField bed = new TextField();
+                bed.setText(cells.get(4).toString());
+                bed.setEditable(false);
+                TextField price = new TextField();
+                price.setText(cells.get(5).toString());
+                price.setEditable(false);
+
+                grid.add(new Label("Name:"), 0, 0);
+                grid.add(name, 1, 0);
+                grid.add(new Label("Address:"), 0, 1);
+                grid.add(add, 1, 1);
+                grid.add(new Label("Rate:"), 0, 2);
+                grid.add(rate, 1, 2);
+                grid.add(new Label("Bed:"), 0, 3);
+                grid.add(bed, 1, 3);
+                grid.add(new Label("Price:"), 0, 4);
+                grid.add(price, 1, 4);
+                menu.getDialogPane().setContent(grid);
+
+                ButtonType contact = new ButtonType("Contact");
+                ButtonType cancel = new ButtonType("Cancel");
+
+                menu.getButtonTypes().addAll(contact, cancel);
+
+                Optional<ButtonType> option = menu.showAndWait();
+                if (option.isPresent()) {
+                    if (option.get() == contact) {
+                        System.out.println("Calling to numberphone ...");
+                    } else {
+
+                    }
+                } else {
+                    //Cancel here!.
+                    System.out.println("Cancel!");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

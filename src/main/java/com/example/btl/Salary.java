@@ -5,13 +5,16 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.geometry.Insets;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.GridPane;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
 public class Salary {
 
@@ -63,7 +66,7 @@ public class Salary {
                 final int currentColumn = i + 1;
                 TableColumn<ObservableList<String>, String> column = new TableColumn<>(nameOfColumn(currentColumn));
                 column.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue().get(currentColumn - 1)));
-                column.setEditable(true);
+                column.setEditable(false);
                 column.setCellFactory(TextFieldTableCell.forTableColumn());
                 column.setOnEditCommit(
                         (TableColumn.CellEditEvent<ObservableList<String>, String> t) -> {
@@ -135,6 +138,74 @@ public class Salary {
             return 100;
         } else {
             return 400;
+        }
+    }
+
+    public void getInfo(Event event) {
+        TablePosition pos = (TablePosition) table.getSelectionModel().getSelectedCells().get(0);
+        int row = pos.getRow();
+        ObservableList cells = (ObservableList) table.getItems().get(row);
+
+        try {
+            if (cells.get(0).toString() != null) {
+
+                Alert menu = new Alert(Alert.AlertType.NONE);
+                menu.setTitle("About");
+                menu.setHeaderText("Salary Information!");
+                //menu.initStyle(StageStyle.UNDECORATED);
+                //menu.getButtonTypes().clear();
+                GridPane grid = new GridPane();
+                grid.setHgap(10);
+                grid.setVgap(10);
+                grid.setPadding(new Insets(20, 150, 10, 10));
+
+                TextField acc = new TextField();
+                acc.setText(cells.get(0).toString());
+                acc.setEditable(false);
+                TextField name = new TextField();
+                name.setText(cells.get(1).toString());
+                name.setEditable(false);
+                TextField phone = new TextField();
+                phone.setText(cells.get(4).toString());
+                phone.setEditable(false);
+                TextField age = new TextField();
+                age.setText(cells.get(5).toString());
+                age.setEditable(false);
+                TextField vip = new TextField();
+                vip.setText(cells.get(6).toString());
+                vip.setEditable(false);
+
+                grid.add(new Label("ID:"), 0, 0);
+                grid.add(acc, 1, 0);
+                grid.add(new Label("Name:"), 0, 1);
+                grid.add(name, 1, 1);
+                grid.add(new Label("Salary:"), 0, 2);
+                grid.add(phone, 1, 2);
+                grid.add(new Label("Worked-day:"), 0, 3);
+                grid.add(age, 1, 3);
+                grid.add(new Label("Pay:"), 0, 4);
+                grid.add(vip, 1, 4);
+                menu.getDialogPane().setContent(grid);
+
+                ButtonType pay = new ButtonType("Paid");
+                ButtonType cancel = new ButtonType("Cancel");
+
+                menu.getButtonTypes().addAll(pay, cancel);
+
+                Optional<ButtonType> option = menu.showAndWait();
+                if (option.isPresent()) {
+                    if (option.get() == pay) {
+                        System.out.println("Paiding ...");
+                    } else {
+
+                    }
+                } else {
+                    //Cancel here!.
+                    System.out.println("Cancel!");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
