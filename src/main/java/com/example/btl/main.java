@@ -85,7 +85,7 @@ public class main extends Application {
             //fileOut.write(out);
             pw.print(manager);
             for (int i = 0;i< sourceData.length;i++) {
-                if (sourceData[i][0] != null && sourceData[i][7] != null) {
+                if (sourceData[i][0] != null) {
                     String line = sourceData[i][0] + "% %" + sourceData[i][7] + "% %" + "staff" + "\n";
                     //byte out[] = line.getBytes();
                     //fileOut.write(out);

@@ -97,7 +97,7 @@ public class StaffManager {
         TextField age = new TextField();
         age.setPromptText("Age:");
         TextField salary = new TextField();
-        age.setPromptText("Salary:");
+        salary.setPromptText("Salary:");
 
         grid.add(new Label("ID:"), 0, 0);
         grid.add(acc, 1, 0);
@@ -133,7 +133,7 @@ public class StaffManager {
                 //ExcelFile workbook = ExcelFile.load("Customer.xlsx");
                 //System.out.println(file.getAbsolutePath());
                 ExcelWorksheet worksheet = workbook.getWorksheet(0);
-                String[][] sourceData = new String[100][7];
+                String[][] sourceData = new String[100][8];
                 int temp = 0;
                 for (int row = 0; row < sourceData.length; row++) {
                     for (int column = 0; column < sourceData[row].length; column++) {
@@ -149,7 +149,8 @@ public class StaffManager {
                             sourceData[row][3] = age.getText();
                             sourceData[row][4] = salary.getText();
                             sourceData[row][5] = "0";
-                            sourceData[row][6] = "admin";
+                            sourceData[row][6] = "0";
+                            sourceData[row][7] = "admin";
                             temp += 1;
                         }
                     }
@@ -157,7 +158,7 @@ public class StaffManager {
                 //ExcelFile file = new ExcelFile();
                 // worksheet = file.addWorksheet("sheet");
                 for (int row = 0; row < sourceData.length; row++) {
-                    for (int column = 0; column < 7; column++) {
+                    for (int column = 0; column < 8; column++) {
                         if (sourceData[row][column] != null)
                             worksheet.getCell(row, column).setValue(sourceData[row][column]);
                     }
@@ -252,7 +253,6 @@ public class StaffManager {
 
 
     public void getInfo(Event event) {
-        System.out.println("Check Okey!");
         TablePosition pos = (TablePosition) table.getSelectionModel().getSelectedCells().get(0);
         int row = pos.getRow();
         ObservableList cells = (ObservableList) table.getItems().get(row);
