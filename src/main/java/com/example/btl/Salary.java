@@ -1,19 +1,30 @@
 package com.example.btl;
 
 import com.gembox.spreadsheet.*;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.element.Text;
+import com.itextpdf.layout.properties.TextAlignment;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import com.itextpdf.kernel.pdf.*;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 public class Salary {
@@ -207,5 +218,88 @@ public class Salary {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void exportPDF(Event event) throws IOException {
+        File file = new File("src/main/resources/com/example/data/Staff.xlsx");
+        ExcelFile workbook = ExcelFile.load(file.getAbsolutePath());
+        ExcelWorksheet worksheet = workbook.getWorksheet(0);
+        String[][] sourceData = new String[100][7];
+        List<List<String>> data = new ArrayList<>();
+        int trueSize = 0;
+        for (int row = 0; row < sourceData.length; row++) {
+            List<String> line = new ArrayList<>();
+            ExcelCell temp = worksheet.getCell(row, 0);
+            if (temp.getValueType() == CellValueType.NULL) {
+                break;
+            }
+            for (int column = 0; column < sourceData[row].length; column++) {
+                ExcelCell cell = worksheet.getCell(row, column);
+                if (cell.getValueType() != CellValueType.NULL) {
+                    if (column == sourceData[row].length - 1) {
+                        sourceData[row][column] = Integer.toString((Integer.parseInt(sourceData[row][4]) * Integer.parseInt(sourceData[row][5])));
+                        line.add(Integer.toString((Integer.parseInt(sourceData[row][4]) * Integer.parseInt(sourceData[row][5]))));
+                    } else {
+                        sourceData[row][column] = cell.getValue().toString();
+                        line.add(cell.getValue().toString());
+                    }
+                }
+            }
+            data.add(line);
+        }
+        Date date = new Date();
+        String nameDate = date.getDate() + "_" + (date.getMonth() + 1) + "_" + (date.getYear() + 1900);
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialFileName("Salary_Table_" + nameDate);
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf")
+        );
+        File saveFile = fileChooser.showSaveDialog(table.getScene().getWindow());
+        //file.save(saveFile.getAbsolutePath());
+
+        PdfWriter pdfWriter = new PdfWriter(saveFile);
+        PdfDocument pdfDocument = new PdfDocument(pdfWriter);
+        Document document = new Document(pdfDocument);
+
+
+
+        //Text header = new Text("Bảng Lương Nhân Viên Tháng: " + date.getMonth() + 1);
+        Paragraph header = new Paragraph("SALARY TABLE month: " + (date.getMonth() + 1) + "\n\n");
+        header.setTextAlignment(TextAlignment.CENTER);
+        header.setBold();
+
+        Paragraph footer = new Paragraph(("\n...Date.....month.....20......" + "\n" + "          Tabler              ."));
+        footer.setTextAlignment(TextAlignment.RIGHT);
+
+        document.add(header);
+
+        float Size[] = {150f, 150f, 100f, 50f, 200f};
+
+        Table table = new Table(Size);
+
+        table.addCell("ID:");
+        table.addCell("Name:");
+        table.addCell("Salary:");
+        table.addCell("Worked-day:");
+        table.addCell("Pay:");
+
+        for (int i = 0; i < data.size(); i++) {
+            for (int j = 0; j < 5; j++) {
+                if (j < 2) {
+                    table.addCell(sourceData[i][j]);
+                } else {
+                    table.addCell(sourceData[i][j + 2]);
+                }
+            }
+
+        }
+
+        document.add(table);
+        document.add(footer);
+
+        document.close();
+
+
+
     }
 }

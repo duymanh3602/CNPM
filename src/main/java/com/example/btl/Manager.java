@@ -176,6 +176,7 @@ public class Manager implements Initializable {
         phone.setPromptText("Phone:");
         TextField age = new TextField();
         age.setPromptText("Age:");
+        CheckBox type = new CheckBox();
 
         grid.add(new Label("ID:"), 0, 0);
         grid.add(acc, 1, 0);
@@ -187,7 +188,10 @@ public class Manager implements Initializable {
         grid.add(phone, 1, 3);
         grid.add(new Label("Age:"), 0, 4);
         grid.add(age, 1, 4);
+        grid.add(new Label("Manager:"), 0, 5);
+        grid.add(type, 1, 5);
         menu.getDialogPane().setContent(grid);
+
 
         ButtonType register = new ButtonType("Register");
         ButtonType cancel = new ButtonType("Cancel");
@@ -200,17 +204,51 @@ public class Manager implements Initializable {
                 loadData.insertFromFile();
                 for (int i = 0; i < loadData.inputData.size(); i++) {
                     if (loadData.inputData.get(i).getAcc().equals(acc.getText())) {
+                        Alert success = new Alert(Alert.AlertType.WARNING);
+                        success.setHeaderText("Account Already Exist!");
+                        ButtonType cancel2 = new ButtonType("Cancel");
+                        //success.getButtonTypes().addAll();
+                        Optional<ButtonType> click = success.showAndWait();
+                        //if (click.isPresent()) {
+                        //    return;
+                        //}
                         return;
+
                     }
                 }
-                Customer customerNew = new Customer(name.getText(), phone.getText(), acc.getText(), age.getText(), pass.getText());
-                loadData.inputData.add(customerNew.getAccount());
-                loadData.exportToFile("customer");
-                buttonPane.setVisible(true);
-                //logo.setVisible(true);
-                loginButton.setVisible(false);
-                registerButton.setVisible(false);
                 File file = new File("src/main/resources/com/example/data/Customer.xlsx");
+                if (type.isSelected()) {
+                    Account managerNew = new Account(acc.getText(), pass.getText(), "manager");
+                    loadData.inputData.add(managerNew);
+                    loadData.exportToFile("manager");
+                    //buttonPane.setVisible(true);
+                    //logo.setVisible(true);
+                    //loginButton.setVisible(false);
+                    //registerButton.setVisible(false);
+                    Alert success = new Alert(Alert.AlertType.CONFIRMATION);
+                    success.setHeaderText("Register Successfully!");
+                    success.setContentText("Your Account: " + acc.getText() + "\nYour Password: " + pass.getText());
+                    //ButtonType cancel2 = new ButtonType("Cancel");
+                    //success.getButtonTypes().addAll();
+                    Optional<ButtonType> click = success.showAndWait();
+                    file = new File("src/main/resources/com/example/data/Manager.xlsx");
+                } else {
+                    Customer customerNew = new Customer(name.getText(), phone.getText(), acc.getText(), age.getText(), pass.getText());
+                    loadData.inputData.add(customerNew.getAccount());
+                    loadData.exportToFile("customer");
+                    //buttonPane.setVisible(true);
+                    //logo.setVisible(true);
+                    //loginButton.setVisible(false);
+                    //registerButton.setVisible(false);
+                    Alert success = new Alert(Alert.AlertType.CONFIRMATION);
+                    success.setHeaderText("Register Successfully!");
+                    success.setContentText("Your Account: " + acc.getText() + "\nYour Password: " + pass.getText());
+                    //ButtonType cancel2 = new ButtonType("Cancel");
+                    //success.getButtonTypes().addAll();
+                    Optional<ButtonType> click = success.showAndWait();
+                    file = new File("src/main/resources/com/example/data/Customer.xlsx");
+                }
+                //File file = new File("src/main/resources/com/example/data/Customer.xlsx");
                 ExcelFile workbook = ExcelFile.load(file.getAbsolutePath());
                 //ExcelFile workbook = ExcelFile.load("Customer.xlsx");
                 //System.out.println(file.getAbsolutePath());

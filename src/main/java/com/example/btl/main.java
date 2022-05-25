@@ -28,6 +28,7 @@ public class main extends Application {
         launch(args);
         saveDataCus();
         saveDataStaff();
+        saveDataManager();
     }
 
     private static void saveDataCus() throws IOException {
@@ -80,10 +81,6 @@ public class main extends Application {
             FileWriter fw = new FileWriter(file1,true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-            String manager = "manager" + "% %" + "manager" + "% %" + "manager" + "\n";
-            //byte out[] = line.getBytes();
-            //fileOut.write(out);
-            pw.print(manager);
             for (int i = 0;i< sourceData.length;i++) {
                 if (sourceData[i][0] != null) {
                     String line = sourceData[i][0] + "% %" + sourceData[i][7] + "% %" + "staff" + "\n";
@@ -97,6 +94,42 @@ public class main extends Application {
         } catch (IOException e) {
 
             System.out.println("An error occurred."+ e);
+        }
+    }
+
+    private static void saveDataManager() throws IOException {
+        File file = new File("src/main/resources/com/example/data/Manager.xlsx");
+        ExcelFile workbook = ExcelFile.load(file.getAbsolutePath());
+        //ExcelFile workbook = ExcelFile.load("Customer.xlsx");
+        //System.out.println(file.getAbsolutePath());
+        ExcelWorksheet worksheet = workbook.getWorksheet(0);
+        String[][] sourceData = new String[100][8];
+        for (int row = 0; row < sourceData.length; row++) {
+            for (int column = 0; column < sourceData[row].length; column++) {
+                ExcelCell cell = worksheet.getCell(row, column);
+                if (cell.getValueType() != CellValueType.NULL)
+                    sourceData[row][column] = cell.getValue().toString();
+            }
+        }
+        try {
+            //FileOutputStream fileOut = new FileOutputStream("src\\main\\resources\\com\\example\\data\\data.txt"); //Outfile
+            File file1 = new File("src\\main\\resources\\com\\example\\data\\data.txt");
+            FileWriter fw = new FileWriter(file1, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            for (int i = 0; i < sourceData.length; i++) {
+                if (sourceData[i][0] != null) {
+                    String line = sourceData[i][0] + "% %" + sourceData[i][7] + "% %" + "manager" + "\n";
+                    //byte out[] = line.getBytes();
+                    //fileOut.write(out);
+                    pw.print(line);
+                }
+            }
+            //fileOut.close();
+            pw.close();
+        } catch (IOException e) {
+
+            System.out.println("An error occurred." + e);
         }
     }
 }
