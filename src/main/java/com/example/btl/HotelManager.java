@@ -111,7 +111,7 @@ public class HotelManager {
         } else if (n == 3) {
             return "Rating:";
         } else if (n == 4) {
-            return "Room Number:";
+            return "Room ID:";
         } else if (n == 5) {
             return "Bed:";
         } else if (n == 6) {
@@ -123,9 +123,9 @@ public class HotelManager {
 
     private int sizeOfCol(int n) {
         if (n == 1) {
-            return 250;
+            return 300;
         } else if (n == 2) {
-            return 200;
+            return 250;
         } else if (n == 3) {
             return 100;
         } else if (n == 4) {
@@ -135,7 +135,7 @@ public class HotelManager {
         } else if (n == 6) {
             return 150;
         } else {
-            return 260;
+            return 160;
         }
     }
 
@@ -180,6 +180,9 @@ public class HotelManager {
                 TextField price = new TextField();
                 price.setText(cells.get(5).toString());
                 price.setEditable(false);
+                TextField status = new TextField();
+                status.setText(cells.get(6).toString());
+                status.setEditable(false);
 
                 grid.add(new Label("Name:"), 0, 0);
                 grid.add(name, 1, 0);
@@ -191,17 +194,31 @@ public class HotelManager {
                 grid.add(bed, 1, 3);
                 grid.add(new Label("Price:"), 0, 4);
                 grid.add(price, 1, 4);
+                grid.add(new Label("Available: "),0,5);
+                grid.add(status, 1,5);
                 menu.getDialogPane().setContent(grid);
 
                 ButtonType contact = new ButtonType("Contact");
                 ButtonType cancel = new ButtonType("Cancel");
+                ButtonType book = new ButtonType("Book!");
 
-                menu.getButtonTypes().addAll(contact, cancel);
+
+                menu.getButtonTypes().addAll(book, contact, cancel);
 
                 Optional<ButtonType> option = menu.showAndWait();
                 if (option.isPresent()) {
                     if (option.get() == contact) {
                         System.out.println("Calling to numberphone ...");
+                    } else if (option.get() == book) {
+                        if (cells.get(6).toString().equals("no")) {
+                            Alert failBooking = new Alert(Alert.AlertType.ERROR);
+                            failBooking.setHeaderText("This Room is not available now!");
+                            failBooking.showAndWait();
+                        } else {
+                            Alert succesBooking = new Alert(Alert.AlertType.CONFIRMATION);
+                            succesBooking.setHeaderText("Booking Success!\nYour Room ID: " + cells.get(3).toString()+"\nPricing: " + cells.get(5).toString());
+                            succesBooking.showAndWait();
+                        }
                     } else {
 
                     }

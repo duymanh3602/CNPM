@@ -229,17 +229,17 @@ public class StaffManager {
 
     private int sizeOfCol(int n) {
         if (n == 1) {
-            return 150;
+            return 200;
         } else if (n == 2) {
-            return 250;
+            return 350;
         } else if (n == 3) {
-            return 120;
+            return 200;
         } else if (n == 4) {
             return 50;
         } else if (n == 5) {
-            return 150;
+            return 250;
         } else {
-            return 300;
+            return 100;
         }
     }
 

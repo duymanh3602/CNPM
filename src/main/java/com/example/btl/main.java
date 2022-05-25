@@ -18,7 +18,7 @@ public class main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("manager.fxml"));
-        primaryStage.setTitle("Hotel Manager Ultra Application");
+        primaryStage.setTitle("Hotel Manager Application");
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root, 1440, 720));
         primaryStage.show();
