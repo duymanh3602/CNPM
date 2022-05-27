@@ -31,6 +31,7 @@ import java.util.logging.Logger;
 public class Manager implements Initializable {
 
     LoadData loadData = new LoadData();
+    //HotelManager hotelManager = new HotelManager();
 //
     @FXML
     public Pane buttonPane;
@@ -51,6 +52,9 @@ public class Manager implements Initializable {
     private Button loginButton;
 
     @FXML
+    private Button myacc;
+
+    @FXML
     private Button registerButton;
     @FXML
     private StackPane contentArea;
@@ -62,6 +66,7 @@ public class Manager implements Initializable {
             //contentArea.getChildren().removeAll();
             //contentArea.getChildren().setAll(fxml);
             buttonPane.setVisible(false);
+            myacc.setVisible(false);
             //logo.setVisible(false);
 
         } catch (Exception e) {
@@ -87,6 +92,13 @@ public class Manager implements Initializable {
     @FXML
     public void salary(Event event) throws IOException {
         Parent fxml = FXMLLoader.load((getClass().getResource("salary.fxml")));
+        contentArea.getChildren().removeAll();
+        contentArea.getChildren().setAll(fxml);
+    }
+
+    @FXML
+    public void myacc(Event event) throws IOException {
+        Parent fxml = FXMLLoader.load((getClass().getResource("myacc.fxml")));
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
     }
@@ -134,9 +146,12 @@ public class Manager implements Initializable {
                 for (int i = 0; i < loadData.inputData.size(); i++) {
                     if (loadData.inputData.get(i).getAcc().equals(username.getText())) {
                         if (loadData.inputData.get(i).getPass().equals(password.getText())) {
+                            //loadData.setAccLog(username.getText());
+                            HotelManager.manager = username.getText();
                             buttonPane.setVisible(true);
                             loginButton.setVisible(false);
                             registerButton.setVisible(false);
+                            myacc.setVisible(true);
                             if (loadData.inputData.get(i).getType().equals("customer")) {
                                 cus.setVisible(false);
                                 salary.setVisible(false);

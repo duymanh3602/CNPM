@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.btl.Myacc">
+   <children>
+      <Label layoutX="380.0" layoutY="17.0" text="QUẢN LÝ TÀI KHOẢN">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <TextField fx:id="myname" layoutX="200.0" layoutY="160.0" />
+      <Text layoutX="95.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="95.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="username" layoutX="200.0" layoutY="200.0" />
+      <Text layoutX="95.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwords:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="passShow" layoutX="200.0" layoutY="240.0" />
+      <Text layoutX="95.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="type" layoutX="200.0" layoutY="280.0" />
+      <ToggleButton fx:id="show" layoutX="354.0" layoutY="240.0" mnemonicParsing="false" onMouseClicked="#hide" prefWidth="55.0" text="show" />
+      <Button fx:id="change" layoutX="414.0" layoutY="240.0" mnemonicParsing="false" prefWidth="55.0" text="change" />
+      <TextField fx:id="passHide" layoutX="200.0" layoutY="240.0" />
+   </children>
+</AnchorPane>

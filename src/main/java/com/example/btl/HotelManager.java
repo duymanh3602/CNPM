@@ -19,6 +19,22 @@ import java.util.List;
 import java.util.Optional;
 
 public class HotelManager {
+
+    LoadData roomStatus = new LoadData();
+    public static String manager;
+
+    public String getManager() {
+        return manager;
+    }
+
+    public void setManager(String manager) {
+        this.manager = manager;
+    }
+
+
+
+
+
     static {
         SpreadsheetInfo.setLicense("FREE-LIMITED-KEY");
     }
@@ -29,7 +45,8 @@ public class HotelManager {
     @FXML
     public ToggleButton edit;
 
-    public void load(ActionEvent event) throws IOException {
+    public void load(Event event) throws IOException {
+        roomStatus.readMoneyData();
         //FileChooser fileChooser = new FileChooser();
         //fileChooser.setTitle("Open file");
         //File file = fileChooser.showOpenDialog(table.getScene().getWindow());
@@ -40,10 +57,20 @@ public class HotelManager {
         ExcelWorksheet worksheet = workbook.getWorksheet(0);
         String[][] sourceData = new String[100][7];
         for (int row = 0; row < sourceData.length; row++) {
+            ExcelCell idCell = worksheet.getCell(row, 3);
+            ExcelCell priceCell = worksheet.getCell(row, 5);
             for (int column = 0; column < sourceData[row].length; column++) {
                 ExcelCell cell = worksheet.getCell(row, column);
-                if (cell.getValueType() != CellValueType.NULL)
-                    sourceData[row][column] = cell.getValue().toString();
+                if (cell.getValueType() != CellValueType.NULL) {
+                    if (column == 6) {
+                        sourceData[row][column] = getRoomStatus(idCell.getValue().toString());
+                        //Hotel newOne =  new Hotel(idCell.getValue().toString(), priceCell.getValue().toString(), "null");
+                        //roomStatus.inputHotel.add(newOne);
+                    } else {
+                        //System.out.println(cell.getValue().toString());
+                        sourceData[row][column] = cell.getValue().toString();
+                    }
+                }
             }
         }
         fillTable(sourceData);
@@ -86,21 +113,8 @@ public class HotelManager {
                     worksheet.getCell(row, column).setValue(cells.get(column).toString());
             }
         }
-
-        /*
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("XLSX files (*.xlsx)", "*.xlsx"),
-                new FileChooser.ExtensionFilter("XLS files (*.xls)", "*.xls"),
-                new FileChooser.ExtensionFilter("ODS files (*.ods)", "*.ods"),
-                new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv"),
-                new FileChooser.ExtensionFilter("HTML files (*.html)", "*.html")
-        );
-        File saveFile = fileChooser.showSaveDialog(table.getScene().getWindow());
-        */
-
-
         workbook.save(file.getAbsolutePath());
+        roomStatus.saveMoneyData();
     }
 
     private String nameOfColumn(int n) {
@@ -181,7 +195,8 @@ public class HotelManager {
                 price.setText(cells.get(5).toString());
                 price.setEditable(false);
                 TextField status = new TextField();
-                status.setText(cells.get(6).toString());
+                //status.setText(cells.get(6).toString());
+                status.setText(getRoomStatus(cells.get(3).toString()));
                 status.setEditable(false);
 
                 grid.add(new Label("Name:"), 0, 0);
@@ -215,6 +230,10 @@ public class HotelManager {
                             failBooking.setHeaderText("This Room is not available now!");
                             failBooking.showAndWait();
                         } else {
+                            book(cells.get(3).toString(), manager);
+                            System.out.println(manager);
+                            roomStatus.saveMoneyData();
+                            load(event);
                             Alert succesBooking = new Alert(Alert.AlertType.CONFIRMATION);
                             succesBooking.setHeaderText("Booking Success!\nYour Room ID: " + cells.get(3).toString()+"\nPricing: " + cells.get(5).toString());
                             succesBooking.showAndWait();
@@ -229,6 +248,32 @@ public class HotelManager {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private String getRoomStatus(String id) {
+        //roomStatus.readMoneyData();
+        for (int i = 0; i < roomStatus.inputHotel.size(); i++) {
+            if (roomStatus.inputHotel.get(i).getRoomID().equals(id)) {
+                if(roomStatus.inputHotel.get(i).getCustomerID().trim().equals("null")) {
+                    return "yes";
+                } else {
+                    return "no";
+                }
+            }
+        }
+        return "no";
+    }
+
+    private void book(String id, String cusId) {
+        System.out.println(id + " " + cusId);
+        for (int i = 0; i < roomStatus.inputHotel.size(); i++) {
+            if (roomStatus.inputHotel.get(i).getRoomID().equals(id)) {
+                //roomStatus.inputHotel.get(i).setCustomerID(cusId);
+                roomStatus.inputHotel.get(i).booking(cusId);
+                System.out.println("Test: " + roomStatus.inputHotel.get(i).dataInfo());
+                return;
+            }
         }
     }
 

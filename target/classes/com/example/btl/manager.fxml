@@ -37,5 +37,6 @@
       </ImageView>
       <Button fx:id="loginButton" layoutY="280.0" mnemonicParsing="false" onAction="#Login" prefHeight="55.0" prefWidth="280.0" text="LOGIN" />
       <Button fx:id="registerButton" layoutY="335.0" mnemonicParsing="false" onAction="#Register" prefHeight="55.0" prefWidth="280.0" text="REGISTER" />
+      <Button fx:id="myacc" layoutY="665.0" mnemonicParsing="false" onMouseClicked="#myacc" prefHeight="55.0" prefWidth="280.0" text="YOUR ACCOUNT" />
    </children>
 </AnchorPane>
