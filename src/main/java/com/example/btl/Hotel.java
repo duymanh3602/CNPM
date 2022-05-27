@@ -45,7 +45,7 @@ public class Hotel {
     
     public void booking(String customer) {
         this.customerID = customer;
-        System.out.println(this.customerID);
+        //System.out.println(this.customerID);
     }
 
     public void checkOut() {

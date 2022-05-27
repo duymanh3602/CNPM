@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -15,12 +16,17 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class StaffManager {
+public class StaffManager implements Initializable {
 
     LoadData loadData = new LoadData();
+
+
+
 
     @FXML
     public ToggleButton edit;
@@ -32,7 +38,32 @@ public class StaffManager {
     @FXML
     public TableView table;
 
-    public void load(ActionEvent event) throws IOException {
+    @FXML
+    public Button save;
+
+    @FXML
+    public Button add;
+
+    private String checkType() {
+        for (int i = 0; i < loadData.inputData.size(); i++) {
+            if (loadData.inputData.get(i).getAcc().equals(HotelManager.manager)) {
+                return loadData.inputData.get(i).getType();
+            }
+        }
+        return "customer";
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        loadData.insertFromFile();
+        if (checkType().equals("customer")) {
+            add.setVisible(false);
+            save.setVisible(false);
+            edit.setVisible(false);
+        }
+    }
+
+    public void load(Event event) throws IOException {
         //FileChooser fileChooser = new FileChooser();
         //fileChooser.setTitle("Open file");
         //File file = fileChooser.showOpenDialog(table.getScene().getWindow());
@@ -164,6 +195,7 @@ public class StaffManager {
                     }
                 }
                 workbook.save(file.getAbsolutePath());
+                load(event);
                 /*
                 if (pass.getText().equals("111")) {
                     buttonPane.setVisible(true);

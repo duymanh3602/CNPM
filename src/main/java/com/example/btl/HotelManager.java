@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -15,10 +16,12 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class HotelManager {
+public class HotelManager implements Initializable {
 
     LoadData roomStatus = new LoadData();
     public static String manager;
@@ -41,6 +44,12 @@ public class HotelManager {
 
     @FXML
     public TableView table;
+
+    @FXML
+    public Button add;
+
+    @FXML
+    public Button save;
 
     @FXML
     public ToggleButton edit;
@@ -73,6 +82,7 @@ public class HotelManager {
                 }
             }
         }
+        //roomStatus.saveMoneyData();
         fillTable(sourceData);
     }
 
@@ -231,7 +241,7 @@ public class HotelManager {
                             failBooking.showAndWait();
                         } else {
                             book(cells.get(3).toString(), manager);
-                            System.out.println(manager);
+                            //System.out.println(manager);
                             roomStatus.saveMoneyData();
                             load(event);
                             Alert succesBooking = new Alert(Alert.AlertType.CONFIRMATION);
@@ -266,14 +276,148 @@ public class HotelManager {
     }
 
     private void book(String id, String cusId) {
-        System.out.println(id + " " + cusId);
+        //System.out.println(id + " " + cusId);
         for (int i = 0; i < roomStatus.inputHotel.size(); i++) {
             if (roomStatus.inputHotel.get(i).getRoomID().equals(id)) {
                 //roomStatus.inputHotel.get(i).setCustomerID(cusId);
                 roomStatus.inputHotel.get(i).booking(cusId);
-                System.out.println("Test: " + roomStatus.inputHotel.get(i).dataInfo());
+                //System.out.println("Test: " + roomStatus.inputHotel.get(i).dataInfo());
                 return;
             }
+        }
+    }
+
+    private String checkType() {
+        for (int i = 0; i < roomStatus.inputData.size(); i++) {
+            if (roomStatus.inputData.get(i).getAcc().equals(manager)) {
+                return roomStatus.inputData.get(i).getType();
+            }
+        }
+        return "customer";
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        roomStatus.insertFromFile();
+        if (checkType().equals("customer")) {
+            add.setVisible(false);
+            edit.setVisible(false);
+            save.setVisible(false);
+        }
+    }
+
+    public void addHotel(Event event) throws IOException {
+        roomStatus.readMoneyData();
+        Alert menu = new Alert(Alert.AlertType.NONE);
+        menu.setTitle("ADD");
+        menu.setHeaderText("Enter new Hotel Information!");
+        //menu.initStyle(StageStyle.UNDECORATED);
+        //menu.getButtonTypes().clear();
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+
+        TextField name = new TextField();
+        name.setPromptText("Name:");
+        TextField add = new TextField();
+        add.setPromptText("Address:");
+        TextField rate = new TextField();
+        rate.setPromptText("Rate:");
+        TextField id = new TextField();
+        id.setPromptText("RoomID:");
+        TextField bed = new TextField();
+        bed.setPromptText("Bed:");
+        TextField price = new TextField();
+        price.setPromptText("Price:");
+
+        grid.add(new Label("Name:"), 0, 0);
+        grid.add(name, 1, 0);
+        grid.add(new Label("Address:"), 0, 1);
+        grid.add(add, 1, 1);
+        grid.add(new Label("Rate:"), 0, 2);
+        grid.add(rate, 1, 2);
+        grid.add(new Label("RoomID:"), 0, 3);
+        grid.add(id, 1, 3);
+        grid.add(new Label("Bed:"), 0, 4);
+        grid.add(bed, 1, 4);
+        grid.add(new Label("price:"), 0, 5);
+        grid.add(price, 1, 5);
+
+        menu.getDialogPane().setContent(grid);
+
+        ButtonType addButton = new ButtonType("Add");
+        ButtonType cancel = new ButtonType("Cancel");
+
+        menu.getButtonTypes().addAll(addButton, cancel);
+
+        Optional<ButtonType> option = menu.showAndWait();
+        if (option.isPresent()) {
+            if (option.get() == addButton) {
+                roomStatus.insertFromFile();
+                for (int i = 0; i < roomStatus.inputHotel.size(); i++) {
+                    if (roomStatus.inputHotel.get(i).getRoomID().equals(id.getText())) {
+                        return;
+                    }
+                }
+                //Staff staffNew = new Staff(name.getText(), phone.getText(), acc.getText(), age.getText(), salary.getText(), "0","admin");
+                //loadData.inputData.add(staffNew.getAccount());
+                //loadData.exportToFile("staff");
+                Hotel newHotel = new Hotel(id.getText(), price.getText(), "null");
+                roomStatus.inputHotel.add(newHotel);
+                roomStatus.saveMoneyData();
+
+                File file = new File("src/main/resources/com/example/data/Room.xlsx");
+                ExcelFile workbook = ExcelFile.load(file.getAbsolutePath());
+                //ExcelFile workbook = ExcelFile.load("Customer.xlsx");
+                //System.out.println(file.getAbsolutePath());
+                ExcelWorksheet worksheet = workbook.getWorksheet(0);
+                String[][] sourceData = new String[100][7];
+                int temp = 0;
+                for (int row = 0; row < sourceData.length; row++) {
+                    for (int column = 0; column < sourceData[row].length; column++) {
+                        ExcelCell cell = worksheet.getCell(row, column);
+                        if (cell.getValueType() != CellValueType.NULL)
+                            sourceData[row][column] = cell.getValue().toString();
+                        if (worksheet.getCell(row, 0).getValueType() == CellValueType.NULL
+                                && worksheet.getCell(row, 6).getValueType() == CellValueType.NULL
+                                && temp == 0) {
+                            sourceData[row][0] = name.getText();
+                            sourceData[row][1] = add.getText();
+                            sourceData[row][2] = rate.getText();
+                            sourceData[row][3] = id.getText();
+                            sourceData[row][4] = bed.getText();
+                            sourceData[row][5] = price.getText();
+                            sourceData[row][6] = "yes";
+                            temp += 1;
+                        }
+                    }
+                }
+                //ExcelFile file = new ExcelFile();
+                // worksheet = file.addWorksheet("sheet");
+                for (int row = 0; row < sourceData.length; row++) {
+                    for (int column = 0; column < 7; column++) {
+                        if (sourceData[row][column] != null)
+                            worksheet.getCell(row, column).setValue(sourceData[row][column]);
+                    }
+                }
+                workbook.save(file.getAbsolutePath());
+                load(event);
+                /*
+                if (pass.getText().equals("111")) {
+                    buttonPane.setVisible(true);
+                    //logo.setVisible(true);
+                    loginButton.setVisible(false);
+                    registerButton.setVisible(false);
+                }
+
+                 */
+            } else {
+
+            }
+        } else {
+            //Cancel here!.
+            System.out.println("Cancel!");
         }
     }
 

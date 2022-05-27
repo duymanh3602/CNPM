@@ -233,7 +233,7 @@ public class Manager implements Initializable {
                 }
                 File file = new File("src/main/resources/com/example/data/Customer.xlsx");
                 if (type.isSelected()) {
-                    Account managerNew = new Account(acc.getText(), pass.getText(), "manager");
+                    Account managerNew = new Account(acc.getText(), pass.getText(), "manager", name.getText());
                     loadData.inputData.add(managerNew);
                     loadData.exportToFile("manager");
                     //buttonPane.setVisible(true);

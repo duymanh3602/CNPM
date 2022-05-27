@@ -4,11 +4,13 @@ public class Account {
     private String acc;
     private String pass;
     private String type;
+    private String name;
 
-    Account(String acc, String pass, String type) {
+    Account(String acc, String pass, String type, String name) {
         this.acc = acc;
         this.pass = pass;
         this.type = type;
+        this.name = name;
     }
 
     public Account() {
@@ -36,5 +38,13 @@ public class Account {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

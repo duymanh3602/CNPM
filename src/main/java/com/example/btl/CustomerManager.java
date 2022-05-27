@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -16,16 +17,22 @@ import org.shaded.apache.poi.ss.formula.functions.Even;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 public class CustomerManager {
+
+    LoadData inputData = new LoadData();
+
     static {
         SpreadsheetInfo.setLicense("FREE-LIMITED-KEY");
     }
 
     @FXML
     public TableView table;
+
 
     public void load(ActionEvent event) throws IOException {
         //FileChooser fileChooser = new FileChooser();

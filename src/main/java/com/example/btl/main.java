@@ -49,7 +49,7 @@ public class main extends Application {
             FileOutputStream fileOut = new FileOutputStream("src\\main\\resources\\com\\example\\data\\data.txt"); //Outfile
             for (int i = 0;i< sourceData.length;i++) {
                 if (sourceData[i][0] != null && sourceData[i][7] != null) {
-                    String line = sourceData[i][0] + "% %" + sourceData[i][7] + "% %" + "customer" + "\n";
+                    String line = sourceData[i][0] + "% %" + sourceData[i][7] + "% %" + "customer" + "% %" + sourceData[i][1] + "\n";
                     byte out[] = line.getBytes();
                     fileOut.write(out);
                 }
@@ -83,7 +83,7 @@ public class main extends Application {
             PrintWriter pw = new PrintWriter(bw);
             for (int i = 0;i< sourceData.length;i++) {
                 if (sourceData[i][0] != null) {
-                    String line = sourceData[i][0] + "% %" + sourceData[i][7] + "% %" + "staff" + "\n";
+                    String line = sourceData[i][0] + "% %" + sourceData[i][7] + "% %" + "staff" + "% %" + sourceData[i][1] + "\n";
                     //byte out[] = line.getBytes();
                     //fileOut.write(out);
                     pw.print(line);
@@ -119,7 +119,7 @@ public class main extends Application {
             PrintWriter pw = new PrintWriter(bw);
             for (int i = 0; i < sourceData.length; i++) {
                 if (sourceData[i][0] != null) {
-                    String line = sourceData[i][0] + "% %" + sourceData[i][7] + "% %" + "manager" + "\n";
+                    String line = sourceData[i][0] + "% %" + sourceData[i][7] + "% %" + "manager" + "% %" + sourceData[i][1] + "\n";
                     //byte out[] = line.getBytes();
                     //fileOut.write(out);
                     pw.print(line);

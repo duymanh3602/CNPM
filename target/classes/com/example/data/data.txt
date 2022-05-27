@@ -1,56 +1,56 @@
-20020001% %admin% %customer
-20020002% %admin% %customer
-20020003% %admin% %customer
-20020004% %admin% %customer
-20020005% %admin% %customer
-20020006% %admin% %customer
-20020007% %admin% %customer
-20020008% %admin% %customer
-20020009% %admin% %customer
-20020010% %admin% %customer
-20020011% %admin% %customer
-20020012% %admin% %customer
-20020013% %admin% %customer
-20020014% %admin% %customer
-20020015% %admin% %customer
-20020016% %admin% %customer
-20020017% %admin% %customer
-20020018% %admin% %customer
-20020019% %admin% %customer
-20020020% %admin% %customer
-20020021% %admin% %customer
-20020022% %admin% %customer
-20020023% %admin% %customer
-20020024% %admin% %customer
-20020438% %admin% %customer
-manager2% %hello% %customer
-999% %admin% %customer
-1234% %manh% %customer
-432% %admin% %customer
-adminne% %admin% %customer
-19020001% %admin% %staff
-19020002% %admin% %staff
-19020003% %admin% %staff
-19020004% %admin% %staff
-19020005% %admin% %staff
-19020006% %admin% %staff
-19020007% %admin% %staff
-19020008% %admin% %staff
-19020009% %admin% %staff
-19020010% %admin% %staff
-19020011% %admin% %staff
-19020012% %admin% %staff
-19020013% %admin% %staff
-19020014% %admin% %staff
-19020015% %admin% %staff
-19020016% %admin% %staff
-19020017% %admin% %staff
-19020018% %admin% %staff
-19020019% %admin% %staff
-19020020% %admin% %staff
-19020021% %admin% %staff
-99999999% %admin% %staff
-888% %admin% %manager
-duymanh% %admin% %manager
-TestManager% %admin% %manager
-manager% %manager% %manager
+20020001% %admin% %customer% %14
+20020002% %admin% %customer% %3
+20020003% %admin% %customer% %16
+20020004% %admin% %customer% %16
+20020005% %admin% %customer% %16
+20020006% %admin% %customer% %14
+20020007% %admin% %customer% %14
+20020008% %admin% %customer% %30
+20020009% %admin% %customer% %29
+20020010% %admin% %customer% %34
+20020011% %admin% %customer% %97
+20020012% %admin% %customer% %20
+20020013% %admin% %customer% %26
+20020014% %admin% %customer% %50
+20020015% %admin% %customer% %67
+20020016% %admin% %customer% %16
+20020017% %admin% %customer% %17
+20020018% %admin% %customer% %3
+20020019% %admin% %customer% %7
+20020020% %admin% %customer% %9
+20020021% %admin% %customer% %13
+20020022% %admin% %customer% %14
+20020023% %admin% %customer% %50
+20020024% %admin% %customer% %70
+20020438% %admin% %customer% %Đinh Duy Mạnh
+manager2% %hello% %customer% %Mạnh
+999% %admin% %customer% %Ronaldo
+1234% %manh% %customer% %Duy mạnh
+432% %admin% %customer% %999
+adminne% %admin% %customer% %Hello
+19020001% %admin% %staff% %Staff1
+19020002% %admin% %staff% %Staff2
+19020003% %admin% %staff% %Staff3
+19020004% %admin% %staff% %Staff4
+19020005% %admin% %staff% %Staff5
+19020006% %admin% %staff% %Staff6
+19020007% %admin% %staff% %Staff7
+19020008% %admin% %staff% %Staff8
+19020009% %admin% %staff% %Staff9
+19020010% %admin% %staff% %Staff10
+19020011% %admin% %staff% %Staff11
+19020012% %admin% %staff% %Staff12
+19020013% %admin% %staff% %Staff13
+19020014% %admin% %staff% %Staff14
+19020015% %admin% %staff% %Staff15
+19020016% %admin% %staff% %Staff16
+19020017% %admin% %staff% %Staff17
+19020018% %admin% %staff% %Staff18
+19020019% %admin% %staff% %Staff19
+19020020% %admin% %staff% %Staff20
+19020021% %admin% %staff% %Staff21
+99999999% %admin% %staff% %Mạnh Culi
+888% %admin% %manager% %Ronaldo
+duymanh% %admin% %manager% %Duy Mạnh
+TestManager% %admin% %manager% %Tester
+manager% %manager% %manager% %Manager

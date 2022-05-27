@@ -25,13 +25,14 @@ public class LoadData {
 
 
     public void insertFromFile() {
+        inputData.clear();
         try {
             BufferedReader reader = new BufferedReader(new FileReader("src\\main\\resources\\com\\example\\data\\data.txt"));// Infile
             String line = reader.readLine();
             while (line != null) {
                 //int indexOfTab = line.indexOf("% %");
                 String[] process = line.split("% %");
-                Account account = new Account(process[0], process[1], process[2]);
+                Account account = new Account(process[0], process[1], process[2], process[3]);
                 inputData.add(account);
                 line = reader.readLine();
             }
@@ -44,7 +45,7 @@ public class LoadData {
         try {
             FileOutputStream fileOut = new FileOutputStream("src\\main\\resources\\com\\example\\data\\data.txt"); //Outfile
             for (int i = 0;i< inputData.size();i++) {
-                String line = inputData.get(i).getAcc() + "% %" + inputData.get(i).getPass() + "% %" + type + "\n";
+                String line = inputData.get(i).getAcc() + "% %" + inputData.get(i).getPass() + "% %" + type + "% %" + inputData.get(i).getName() + "\n";
                 byte out[] = line.getBytes();
                 fileOut.write(out);
             }
