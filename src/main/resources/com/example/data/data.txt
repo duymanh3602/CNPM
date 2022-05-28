@@ -1,9 +1,9 @@
-20020001% %admin% %customer% %14
-20020002% %admin% %customer% %3
-20020003% %admin% %customer% %16
-20020004% %admin% %customer% %16
-20020005% %admin% %customer% %16
-20020006% %admin% %customer% %14
+20020001% %admin% %customer% %John Cena
+20020002% %admin% %customer% %The Rock
+20020003% %admin% %customer% %Ronaldo
+20020004% %admin% %customer% %Benzema
+20020005% %admin% %customer% %Tony Kroos
+20020006% %admin% %customer% %Klopp
 20020007% %admin% %customer% %14
 20020008% %admin% %customer% %30
 20020009% %admin% %customer% %29
@@ -22,12 +22,6 @@
 20020022% %admin% %customer% %14
 20020023% %admin% %customer% %50
 20020024% %admin% %customer% %70
-20020438% %admin% %customer% %Đinh Duy Mạnh
-manager2% %hello% %customer% %Mạnh
-999% %admin% %customer% %Ronaldo
-1234% %manh% %customer% %Duy mạnh
-432% %admin% %customer% %999
-adminne% %admin% %customer% %Hello
 19020001% %admin% %staff% %Staff1
 19020002% %admin% %staff% %Staff2
 19020003% %admin% %staff% %Staff3
