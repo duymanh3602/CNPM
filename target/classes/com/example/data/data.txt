@@ -28,6 +28,7 @@ manager2% %hello% %customer% %Mạnh
 1234% %manh% %customer% %Duy mạnh
 432% %admin% %customer% %999
 adminne% %admin% %customer% %Hello
+20020999% %admin% %customer% %Mạnh add
 19020001% %admin% %staff% %Staff1
 19020002% %admin% %staff% %Staff2
 19020003% %admin% %staff% %Staff3

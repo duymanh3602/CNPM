@@ -11,11 +11,13 @@
    <children>
       <TableView fx:id="table" editable="true" layoutY="70.0" onMouseClicked="#getInfo" prefHeight="650.0" prefWidth="1160.0" />
       <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false" onAction="#load" prefHeight="35.0" prefWidth="80.0" text="LOAD" />
-      <Button layoutX="95.0" layoutY="35.0" mnemonicParsing="false" onAction="#save" prefHeight="35.0" prefWidth="80.0" text="SAVE" />
+      <Button fx:id="saveButton" layoutX="95.0" layoutY="35.0" mnemonicParsing="false" onAction="#save" prefHeight="35.0" prefWidth="80.0" text="SAVE" />
       <Label layoutX="375.0" layoutY="17.0" text="QUẢN LÝ KHÁCH HÀNG">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
+      <ToggleButton fx:id="editButton" layoutX="1000.0" layoutY="35.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="80.0" text="EDIT" />
+      <Button fx:id="addButton" layoutX="1080.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#addNewCustomer" prefHeight="35.0" prefWidth="80.0" text="ADD" />
    </children>
 </AnchorPane>
